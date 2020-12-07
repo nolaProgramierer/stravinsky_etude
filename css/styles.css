@@ -6,6 +6,19 @@ body {
     width: 640px;
     border: 1px solid black;
     margin-top: 20px;
+    visibility: hidden;
+    box-shadow: 5px 10px #888888;
+    position: relative;
+    z-index: 1;
 }
-.stravinsky {
+img {
+    z-index: 2;
+}
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    left: 0px;
+    z-index: 3;
+    background-color: #fffacd;
 }

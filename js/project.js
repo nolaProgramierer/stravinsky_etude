@@ -1,13 +1,20 @@
 $(document).ready(function () {
     "use strict";
-
+    // Intialize jwplayer instance
     var player = jwplayer("videoDiv").setup({
+        // Media file hosted on AWS
         file: "https://gl-music-site.s3.amazonaws.com/videos/stravinsky_etude4.mp4",
+        // Player instance options
         height: 360,
         width: 640,
         controls: true,
     });
 
+    /*
+        Object containing timestamps and images for music slides.
+        Timestamp obtained by writing function to log slide media
+        position from 'player.on)("time,...")' method.
+    */
     var etude = {
         bars: [
             { timestamp: 0, slide: "images/etude_01.png" },
@@ -48,39 +55,75 @@ $(document).ready(function () {
         ]
     };
 
+    // As player instance plays, pass media position to function
     player.on("time", function (evt) {
         showMeasure(evt.position);
-        /*
-        $("#slides").click(function () {
-            console.log(evt.position);
-        });
-        */
     });
 
-    function showMeasure(time) {
-        /*
-        for (var i = 0; i <= etude.bars.length - 1; i++) {
-            if (time >= etude.bars[i].start && time <= (etude.bars[i].start + etude.bars[i].dur)) {
-                $("#slides").html(`<img class="img-fluid" src=${etude.bars[i].slide}>`);
-                console.log(etude.bars[i].slide)
-                return;
-            }
-        }
-        */
 
+    // Change music slide synchronized with performance
+    var currentBars = -1;
+    function showMeasure(time) {
+        // Start at end of object and find first property where
+        // the timestamp is less than the player position property
+        // and return to prevent multiple property returns
         for (var i = etude.bars.length - 1; i >= 0; i--) {
             if (etude.bars[i].timestamp <= time) {
-                $("#slides").html(`<img class="img-fluid" src=${etude.bars[i].slide}>`);
+                if (currentBars != i) {
+                    // Add corresponding music slide to HTML
+                    $("#slides").html(`<img class="img-fluid" src=${etude.bars[i].slide}>`);
+                    currentBars = i;
+                }
                 return;
             }
         }
     }
 
 
+    showMusic();
 
+
+    $("#button").click(function () {
+        $("#overlay").animate({
+            left: "640px",
+        });
+    });
 
 
 
     console.log("Document ready");
 });// End ready
 
+
+// Show music slide div on checkbox
+function showMusic() {
+    $('input[id="show-music"]').click(function () {
+        // If box checked show div
+        if ($(this).prop("checked") === true) {
+            $("#slides").css("visibility", "visible");
+            console.log("Checked");
+        }
+        // If box not checked hide div
+        else if ($(this).prop("checked") === false) {
+            $("#slides").css("visibility", "hidden");
+            console.log("Unchecked");
+        }
+    });
+}
+
+
+
+function observeChanges() {
+    var targetNode = document.querySelector("#slides");
+    const config = { childList: true };
+    var callback = function (mutationList, observer) {
+        for (var mutation of mutationList) {
+            if (mutation.type === "childList") {
+                console.log("Html has been added");
+                return true;
+            }
+        }
+    };
+    var observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+}
