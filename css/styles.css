@@ -20,5 +20,7 @@ img {
     width: 10%;
     left: 0px;
     z-index: 3;
-    background-color: #fffacd;
+    background-color: yellow;
+    display: block;
+    opacity: 0.25;
 }
