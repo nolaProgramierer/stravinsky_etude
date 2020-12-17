@@ -13,11 +13,13 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
+        <h1 class="text-center">2:15 in F# major</h1>
         <div class="row">
             <div class="col-md-6" id="videoDiv">
             </div>
-            <div class="col-md-6" id="music-page">
+            <div class="col-md-6" id="bio">
+                <h4 class="text-center">About the Artist</h4>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                 et dolore magna aliqua. Malesuada proin libero nunc consequat. In mollis nunc sed id semper risus in
                 hendrerit. Scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada.
@@ -32,28 +34,41 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-check col-md-12">
+                <input class="form-check-input" type="checkbox" id="show-music" name="show-music" value="">
+                <label class="form-check-label" for="show-music"> Would you like to follow along with the music?
+                </label>
+            </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="show-music" name="show-music" value="">
-            <label class="form-check-label" for="show-music"> Would you like to follow along with the music?
-            </label>
+            <div class="form-check col-md-12">
+                <input class="form-check-input" type="checkbox" id="show-overlay" name="show-overlay" value="">
+                <label class="form-check-label" for="show-overlay"> Would you like help in following the music?</label>
+            </div>
+
+            <div class="form-check col-md-12">
+                <input class="form-check-input" type="checkbox" id="bar-counter" name="bar-counter" value="">
+                <label class="form-check-label" for="bar-counter"> Would you like to count the measures?</label>
+            </div>
         </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="show-overlay" name="show-overlay" value="">
-            <label class="form-check-label" for="show-overlay"> Would you like help in following the music?</label>
+        <div class="row">
+            <div id="slides">
+                <!--Add overlay div here-->
+                <img src="images/music/etude_01.png" width="638" height="138" alt=" Measure of Etude">
+            </div>
         </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="bar-counter" name="bar-counter" value="">
-            <label class="form-check-label" for="bar-counter"> Would you like to count the measures?</label>
+        <div class="col-md-6" id="ms-counter"></div>
+
+        <div class="col-md-6">
+            <img src="images/music/Etude_4_1.png" class="img-fluid" id="music-page" alt="music page">
         </div>
 
-        <div id="slides">
-            <!--Add overlay div here-->
-            <img class="img-fluid" src="images/music/etude_01.png">
-        </div>
-        <div id="ms-counter"></div>
+
+
+
+
 
     </div>
 </body>

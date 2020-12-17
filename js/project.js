@@ -87,6 +87,8 @@ $(document).ready(function () {
                         checkOverlay();
                         // Animate overlay to coincide to duration of slide in milliseconds
                         moveOverlay(etude.bars[i].dur * 1000);
+                        // Turn pages of music score
+                        turnPage(etude.bars[i].measure);
                     }
                 }
                 return;
@@ -98,8 +100,26 @@ $(document).ready(function () {
     // Show measure counter on checkbox
     showMeasures();
 
-    console.log("Document ready");
 });// End ready
+
+
+// Function to show page on which excert is playing
+// Check measure properties of object while player is playing
+function turnPage(objProp) {
+    if (objProp === 11) {
+        $("#music-page").attr("src", "images/music/Etude_4_2.png");
+    } else if (objProp === 22) {
+        $("#music-page").attr("src", "images/music/Etude_4_3.png");
+    } else if (objProp === 32) {
+        $("#music-page").attr("src", "images/music/Etude_4_4.png");
+    } else if (objProp === 43) {
+        $("#music-page").attr("src", "images/music/Etude_4_5.png");
+    } else if (objProp === 54) {
+        $("#music-page").attr("src", "images/music/Etude_4_6.png");
+    } else if (objProp === 66) {
+        $("#music-page").attr("src", "images/music/Etude_4_7.png");
+    }
+}
 
 
 // Show measure number of displayed slide
@@ -121,7 +141,7 @@ function showMeasureNums(startMs, nextMs) {
 function checkOverlay() {
     var checkbox = document.getElementById("show-overlay");
     var overlay = document.querySelector(".overlay");
-    // If checked show
+    // If checked show, if not display nothing
     overlay.style.display = checkbox.checked ? "block" : "none";
 }
 
@@ -132,10 +152,12 @@ function showMusic() {
         // If box checked show div
         if ($(this).prop("checked") === true) {
             $("#slides").css("visibility", "visible");
+            $("#music-page").css("visibility", "visible");
         }
         // If box not checked hide div
         else if ($(this).prop("checked") === false) {
             $("#slides").css("visibility", "hidden");
+            $("#music-page").css("visibility", "hidden");
         }
     });
 }
@@ -156,7 +178,7 @@ function showMeasures() {
 }
 
 
-// Listen for changes to html element
+// Listen for changes to music slide element
 function observeChanges() {
     // Identify target element
     var targetNode = document.querySelector("#slides");
@@ -188,12 +210,5 @@ function moveOverlay(speed) {
         easing: "linear"
     }
     );
-}
-
-// Check for correct durations against property start times
-function checkPropertySums(objArr) {
-    $(objArr).each(function () {
-        console.log($(this).timestamp, $(this).timestamp + $(this).dur);
-    });
 }
 

@@ -30,3 +30,6 @@ img {
     margin-top: 20px;
     visibility: hidden;
 }
+#music-page {
+    visibility: hidden;
+}
