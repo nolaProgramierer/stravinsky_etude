@@ -13,29 +13,49 @@
 </head>
 
 <body>
-    <div class="container">
-        <p>This is my final project</p>
-        <div id="videoDiv">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6" id="videoDiv">
+            </div>
+            <div class="col-md-6" id="music-page">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Malesuada proin libero nunc consequat. In mollis nunc sed id semper risus in
+                hendrerit. Scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada.
+                Convallis convallis tellus id interdum velit laoreet id donec ultrices. Libero justo laoreet sit
+                amet cursus sit amet. Congue eu consequat ac felis donec et odio. Enim ut sem viverra aliquet eget
+                sit amet. Malesuada fames ac turpis egestas sed tempus urna. Eros in cursus turpis massa. Commodo
+                viverra maecenas accumsan lacus. At augue eget arcu dictum varius duis at consectetur. Tellus
+                pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum. Bibendum est ultricies
+                integer quis auctor elit sed vulputate. Non diam phasellus vestibulum lorem. Neque egestas congue
+                quisque egestas diam in arcu cursus.
+
+            </div>
         </div>
 
-        <input type="checkbox" id="show-music" name="show-music" value="music">
-        <label for="show-music"> Would you like to follow along with the music?</label><br>
 
-        <input type="checkbox" id="show-overlay" name="show-overlay" value="overlay">
-        <label for="show-overlay"> Would you like help in following the music?</label><br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="show-music" name="show-music" value="">
+            <label class="form-check-label" for="show-music"> Would you like to follow along with the music?
+            </label>
+        </div>
 
-        <input type="checkbox" id="bar-counter" name="bar-counter" value="bar-counter">
-        <label for="bar-counter"> Would you like to count the measures?</label><br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="show-overlay" name="show-overlay" value="">
+            <label class="form-check-label" for="show-overlay"> Would you like help in following the music?</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="bar-counter" name="bar-counter" value="">
+            <label class="form-check-label" for="bar-counter"> Would you like to count the measures?</label>
+        </div>
 
         <div id="slides">
             <!--Add overlay div here-->
             <img class="img-fluid" src="images/music/etude_01.png">
         </div>
-
         <div id="ms-counter"></div>
 
-
-
+    </div>
 </body>
 
 </html>

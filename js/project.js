@@ -5,8 +5,9 @@ $(document).ready(function () {
         // Media file hosted on AWS
         file: "https://gl-music-site.s3.amazonaws.com/videos/stravinsky_etude4.mp4",
         // Player instance options
-        height: 360,
-        width: 640,
+        responsive: true,
+        width: "50%",
+        aspectratio: "16:9",
         controls: true,
         image: "images/stravinsky_etude-poster.png"
     });
@@ -78,8 +79,9 @@ $(document).ready(function () {
                     currentBars = i;
                     // Look for changes in 'slides' div
                     if (observeChanges) {
-                        // Show measure numbers
+                        // Show measure numbers by comparing two adjacent array object props
                         showMeasureNums(etude.bars[i].measure, (etude.bars[i + 1].measure - 1));
+                        // Add slide overlay
                         $("#slides").prepend("<div class='overlay'></div>");
                         // Show overlay if checkbox checked
                         checkOverlay();
@@ -93,7 +95,7 @@ $(document).ready(function () {
     }
     // Show slides on checkbox
     showMusic();
-    // Show measure counter
+    // Show measure counter on checkbox
     showMeasures();
 
     console.log("Document ready");
@@ -187,7 +189,6 @@ function moveOverlay(speed) {
     }
     );
 }
-
 
 // Check for correct durations against property start times
 function checkPropertySums(objArr) {
