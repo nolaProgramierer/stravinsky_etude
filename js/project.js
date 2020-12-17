@@ -8,7 +8,7 @@ $(document).ready(function () {
         height: 360,
         width: 640,
         controls: true,
-        // Add poster"images/stravinsky_etude-poster.png"
+        image: "images/stravinsky_etude-poster.png"
     });
 
     /*
