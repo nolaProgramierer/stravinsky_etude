@@ -22,9 +22,9 @@ $(document).ready(function () {
             { timestamp: 6.550132, dur: 3.25178, measure: 3, slide: "images/music/etude_02.png" },
             { timestamp: 9.801912, dur: 3.246132, measure: 5, slide: "images/music/etude_03.png" },
             { timestamp: 13.048044, dur: 3.500522, measure: 7, slide: "images/music/etude_04.png" },
-            { timestamp: 16.548566, dur: 3.248912, meausre: 9, slide: "images/music/etude_05.png" },
+            { timestamp: 16.548566, dur: 3.248912, measure: 9, slide: "images/music/etude_05.png" },
             { timestamp: 19.797478, dur: 3.249912, measure: 11, slide: "images/music/etude_06.png" },
-            { timestamp: 23.04739, dur: 3.50268, measuire: 13, slide: "images/music/etude_07.png" },
+            { timestamp: 23.04739, dur: 3.50268, measure: 13, slide: "images/music/etude_07.png" },
             { timestamp: 26.55007, dur: 5.250572, measure: 15, slide: "images/music/etude_08.png" },
             { timestamp: 31.800642, dur: 3.500797, measure: 18, slide: "images/music/etude_09.png" },
             { timestamp: 35.301439, dur: 3.749062, measure: 20, slide: "images/music/etude_10.png" },
@@ -61,16 +61,16 @@ $(document).ready(function () {
         showMeasure(evt.position);
     });
 
-
     // Change music slide synchronized with performance
     var currentBars = -1;
+
     function showMeasure(time) {
         // Start at end of object and find first property where
         // the timestamp is less than the player position property
         // and return to prevent multiple property returns
         for (var i = etude.bars.length - 1; i >= 0; i--) {
             if (etude.bars[i].timestamp <= time) {
-                // Add music slide png if not same as existing
+                // Add music slide png if not same as existing slide
                 if (currentBars != i) {
                     // Add corresponding music slide to HTML
                     $("#slides").html(`<img class="img-fluid" src=${etude.bars[i].slide}>`);
@@ -78,56 +78,76 @@ $(document).ready(function () {
                     currentBars = i;
                     // Look for changes in 'slides' div
                     if (observeChanges) {
-                        $("#slides").prepend("<div class='overlay'>Overlay</div>");
-                        console.log("Slide div change observed");
+                        measureNumber(etude.bars[i], etude.bars[i + 1], etude.bars[i].dur);
+                        $("#slides").prepend("<div class='overlay'></div>");
+                        // Show overlay if checkbox checked
+                        checkOverlay();
+                        // Animate overlay to coincide to duration of slide in milliseconds
+                        moveOverlay(etude.bars[i].dur * 1000);
                     }
                 }
                 return;
             }
         }
     }
-
-    /*
-        Alternate function with dur property
-        function showMeasure(time) {
-            var etudeArr = etude.bars;
-            $("etudeArr").each(function () {
-                if (time >= $(this).attr("timestamp") && time <= $(this).attr("timestamp") + $(this).attr("dur")) {
-                    if ((currentBars != i)) {
-                        // Add corresponding music slide to HTML
-                        $("#slides").html(`<img class="img-fluid" src=${etudeArr[i].slide}>`);
-                        // Reset slide number
-                        currentBars = i;
-                        // Look for changes in 'slides' div
-                        if (observeChanges) {
-                            $("#slides").prepend("<div class='overlay'>Overlay</div>");
-                            console.log("Slide div change observed");
-                        }
-                    }
-                    return;
-                }
-            }
-        }   
-    */
-
-
-
     // Show slides on checkbox
     showMusic();
 
-
-
-
-    $("#button").click(function () {
-        $("#overlay").animate({
-            left: "640px",
-        });
-    });
-
-
-
     console.log("Document ready");
 });// End ready
+
+
+
+let counter = 0;
+function count() {
+    counter++;
+    console.log(counter);
+}
+
+// Show/hide measure counter
+//setInterval(count, measureNumber(etude.bars[i], etude.bars[i + 1], etude.bars[i].dur));
+
+
+function countMeasure(num, start, time) {
+    for (var i = 0; i < num; i++) {
+        (function (i) {
+            setInterval(function () {
+                console.log(start);
+            }, 1000);
+        })(i);
+    }
+}
+
+
+
+// Returns average duration of each measure shown in slide
+function measureNumber(currArrObj, nextArrObj, time) {
+    // Measure number of first measure of slide
+    var startMeasure = currArrObj.measure;
+    // Number of measure on slide
+    var numOfMeasures = nextArrObj.measure - startMeasure;
+    // Number of measures on slide divided by duration of slide for avg measure duration
+    var barDuration = time / numOfMeasures;
+    // Avg duration of each measure on slide in seconds
+    //setInterval(countMeasure(numOfMeasures, startMeasure), 1000);
+    countMeasure(numOfMeasures, startMeasure, time);
+
+
+    var span = document.createElement("span");
+    span.innerHTML = barDuration.toString();
+
+    document.body.appendChild(span);
+    //console.log(barDuration);
+}
+
+
+// For each slide change check for overlay checkbox status
+function checkOverlay() {
+    var checkbox = document.getElementById("show-overlay");
+    var overlay = document.querySelector(".overlay");
+    // If checked show
+    overlay.style.display = checkbox.checked ? "block" : "none";
+}
 
 
 // Show music slide div on checkbox
@@ -136,12 +156,10 @@ function showMusic() {
         // If box checked show div
         if ($(this).prop("checked") === true) {
             $("#slides").css("visibility", "visible");
-            console.log("Checkbox[0] checked");
         }
         // If box not checked hide div
         else if ($(this).prop("checked") === false) {
             $("#slides").css("visibility", "hidden");
-            console.log("Checkbox[0] unchecked");
         }
     });
 }
@@ -168,12 +186,23 @@ function observeChanges() {
 }
 
 
+// Animate overlay on displayed slide
+// Argument determined by slide duration
+function moveOverlay(speed) {
+    $(".overlay").animate({
+        left: "640px",
+    }, {
+        duration: speed,
+        easing: "linear"
+    }
+    );
+}
+
+
 // Check for correct durations against property start times
 function checkPropertySums(objArr) {
     $(objArr).each(function () {
         console.log($(this).timestamp, $(this).timestamp + $(this).dur);
-    })
+    });
 }
 
-// Add slide numbers to HTML as they appear
-// Functionality to click number to go back to particular measure number
