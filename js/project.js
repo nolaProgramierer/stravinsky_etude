@@ -34,7 +34,7 @@ $(document).ready(function () {
             { timestamp: 49.54824, dur: 3.500493, measure: 28, slide: "images/music/etude_14.png" },
             { timestamp: 53.048733, dur: 3.499473, measure: 30, slide: "images/music/etude_15.png" },
             { timestamp: 56.548206, dur: 5.499476, measure: 32, slide: "images/music/etude_16.png" },
-            { timestamp: 62.047682, dur: 3.254155, meausre: 35, slide: "images/music/etude_17.png" },
+            { timestamp: 62.047682, dur: 3.254155, measure: 35, slide: "images/music/etude_17.png" },
             { timestamp: 65.301837, dur: 3.495474, measure: 37, slide: "images/music/etude_18.png" },
             { timestamp: 68.797311, dur: 3.751365, measure: 39, slide: "images/music/etude_19.png" },
             { timestamp: 72.548676, dur: 3.749065, measure: 41, slide: "images/music/etude_20.png" },
@@ -78,7 +78,8 @@ $(document).ready(function () {
                     currentBars = i;
                     // Look for changes in 'slides' div
                     if (observeChanges) {
-                        measureNumber(etude.bars[i], etude.bars[i + 1], etude.bars[i].dur);
+                        // Show measure numbers
+                        showMeasureNums(etude.bars[i].measure, (etude.bars[i + 1].measure - 1));
                         $("#slides").prepend("<div class='overlay'></div>");
                         // Show overlay if checkbox checked
                         checkOverlay();
@@ -92,52 +93,25 @@ $(document).ready(function () {
     }
     // Show slides on checkbox
     showMusic();
+    // Show measure counter
+    showMeasures();
 
     console.log("Document ready");
 });// End ready
 
 
-
-let counter = 0;
-function count() {
-    counter++;
-    console.log(counter);
-}
-
-// Show/hide measure counter
-//setInterval(count, measureNumber(etude.bars[i], etude.bars[i + 1], etude.bars[i].dur));
-
-
-function countMeasure(num, start, time) {
-    for (var i = 0; i < num; i++) {
-        (function (i) {
-            setInterval(function () {
-                console.log(start);
-            }, 1000);
-        })(i);
+// Show measure number of displayed slide
+function showMeasureNums(startMs, nextMs) {
+    var barDiv = document.querySelector("#ms-counter");
+    // Check for existing nodes; if existing, remove
+    if (barDiv.hasChildNodes) {
+        barDiv.innerHTML = "";
     }
-}
-
-
-
-// Returns average duration of each measure shown in slide
-function measureNumber(currArrObj, nextArrObj, time) {
-    // Measure number of first measure of slide
-    var startMeasure = currArrObj.measure;
-    // Number of measure on slide
-    var numOfMeasures = nextArrObj.measure - startMeasure;
-    // Number of measures on slide divided by duration of slide for avg measure duration
-    var barDuration = time / numOfMeasures;
-    // Avg duration of each measure on slide in seconds
-    //setInterval(countMeasure(numOfMeasures, startMeasure), 1000);
-    countMeasure(numOfMeasures, startMeasure, time);
-
-
+    // Create text node and add to DOM
     var span = document.createElement("span");
-    span.innerHTML = barDuration.toString();
-
-    document.body.appendChild(span);
-    //console.log(barDuration);
+    // Add measures of current slide to DOM
+    span.innerHTML = "Measures # : " + startMs.toString() + " - " + nextMs.toString();
+    barDiv.appendChild(span);
 }
 
 
@@ -165,6 +139,21 @@ function showMusic() {
 }
 
 
+// Show music slide div on checkbox
+function showMeasures() {
+    $('input[id="bar-counter"]').click(function () {
+        // If box checked show div
+        if ($(this).prop("checked") === true) {
+            $("#ms-counter").css("visibility", "visible");
+        }
+        // If box not checked hide div
+        else if ($(this).prop("checked") === false) {
+            $("#ms-counter").css("visibility", "hidden");
+        }
+    });
+}
+
+
 // Listen for changes to html element
 function observeChanges() {
     // Identify target element
@@ -184,6 +173,7 @@ function observeChanges() {
     // Call function on target node with config options
     observer.observe(targetNode, config);
 }
+
 
 
 // Animate overlay on displayed slide

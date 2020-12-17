@@ -26,3 +26,7 @@ img {
     display: block;
     opacity: 0.25;
 }
+#ms-counter {
+    margin-top: 20px;
+    visibility: hidden;
+}
