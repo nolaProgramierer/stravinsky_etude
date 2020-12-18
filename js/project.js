@@ -9,7 +9,8 @@ $(document).ready(function () {
         width: "50%",
         aspectratio: "16:9",
         controls: true,
-        image: "images/stravinsky_etude-poster.png"
+        image: "images/stravinsky_etude-poster.png",
+
     });
 
     /*
@@ -107,6 +108,7 @@ $(document).ready(function () {
 // Check measure properties of object while player is playing
 function turnPage(objProp) {
     if (objProp === 11) {
+        // Change img upon measure number
         $("#music-page").attr("src", "images/music/Etude_4_2.png");
     } else if (objProp === 22) {
         $("#music-page").attr("src", "images/music/Etude_4_3.png");
@@ -133,6 +135,7 @@ function showMeasureNums(startMs, nextMs) {
     var span = document.createElement("span");
     // Add measures of current slide to DOM
     span.innerHTML = "Measures # : " + startMs.toString() + " - " + nextMs.toString();
+    // Add span to page
     barDiv.appendChild(span);
 }
 
@@ -204,11 +207,14 @@ function observeChanges() {
 // Argument determined by slide duration
 function moveOverlay(speed) {
     $(".overlay").animate({
-        left: "640px",
+        // Animation for length of responsive div
+        left: "100%",
     }, {
         duration: speed,
+        // Default easing changed
         easing: "linear"
     }
     );
 }
+
 

@@ -15,22 +15,23 @@
 <body>
     <div class="container">
         <h1 class="text-center">2:15 in F# major</h1>
+        <hr>
         <div class="row">
             <div class="col-md-6" id="videoDiv">
             </div>
             <div class="col-md-6" id="bio">
-                <h4 class="text-center">About the Artist</h4>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Malesuada proin libero nunc consequat. In mollis nunc sed id semper risus in
-                hendrerit. Scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada.
-                Convallis convallis tellus id interdum velit laoreet id donec ultrices. Libero justo laoreet sit
-                amet cursus sit amet. Congue eu consequat ac felis donec et odio. Enim ut sem viverra aliquet eget
-                sit amet. Malesuada fames ac turpis egestas sed tempus urna. Eros in cursus turpis massa. Commodo
-                viverra maecenas accumsan lacus. At augue eget arcu dictum varius duis at consectetur. Tellus
-                pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum. Bibendum est ultricies
-                integer quis auctor elit sed vulputate. Non diam phasellus vestibulum lorem. Neque egestas congue
-                quisque egestas diam in arcu cursus.
-
+                <h4 class="text-center">About this app</h4>
+                <p>The programmer has taken a video of a portion of a piano recital he gave in New York City.
+                    The video is hosted on AWS and is played on an instance of JWPlayer. According to the viewers
+                    perferences, the video can be viewed by itself or with the music shown.</p>
+                <p>If the viewer wishes to view the music as the video plays, checkboxes allow the viewer to
+                    choose the extent to which the music played on the video is shown. The music can be followed
+                    in brief slides and with an overlay highlighting the portion of the slide being played can be shown.
+                    The speed with which the overlay traverses the slides is determined by the duration of the music
+                    which
+                    was determined to the 6th decimal point by a custom function used to capture each slide's duration
+                    with respect to the music being played. The pages of the larger music score change according to
+                    the video. A measure counter for the music being displayed is also available by checkbox.</p>
             </div>
         </div>
 
@@ -53,23 +54,15 @@
         </div>
 
         <div class="row">
-            <div id="slides">
+            <div class="col-md-8" id="slides">
                 <!--Add overlay div here-->
-                <img src="images/music/etude_01.png" width="638" height="138" alt=" Measure of Etude">
+                <img class="img-thumbnail" src="images/music/etude_01.png" alt=" Measure of Etude">
+            </div>
+            <div class="col-md-4">
+                <div id="ms-counter"></div>
+                <img src="images/music/Etude_4_1.png" class="img-fluid" id="music-page" alt="music page">
             </div>
         </div>
-
-        <div class="col-md-6" id="ms-counter"></div>
-
-        <div class="col-md-6">
-            <img src="images/music/Etude_4_1.png" class="img-fluid" id="music-page" alt="music page">
-        </div>
-
-
-
-
-
-
     </div>
 </body>
 
