@@ -54,7 +54,9 @@ $(document).ready(function () {
             { timestamp: 118.550042, dur: 3.499711, measure: 68, slide: "images/music/etude_32.png" },
             { timestamp: 122.049753, dur: 2.998197, measure: 70, slide: "images/music/etude_33.png" },
             { timestamp: 125.04795, dur: 3.254362, measure: 72, slide: "images/music/etude_34.png" },
-            { timestamp: 128.302312, dur: 4.00, measure: 74, slide: "images/music/etude_35.png" }
+            { timestamp: 128.302312, dur: 4.00, measure: 74, slide: "images/music/etude_35.png" },
+            // Add extra object to complete the overlay travel
+            { timestamp: 132.302312, dur: 4.00, measure: 76, slide: "images/music/etude_35.png" }
         ]
     };
 
